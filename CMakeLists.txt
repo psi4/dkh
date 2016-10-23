@@ -42,6 +42,10 @@ add_library(dkh ${sources_list})
 set_target_properties(dkh PROPERTIES POSITION_INDEPENDENT_CODE ${BUILD_FPIC})
 if(${BUILD_SHARED_LIBS})
     target_link_libraries(dkh PRIVATE ${LIBC_INTERJECT})
+
+    if(APPLE)
+        set_target_properties(dkh PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
+    endif()
 endif()
 
 # <<<  Install  >>>
