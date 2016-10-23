@@ -6,13 +6,13 @@
 #
 # ::
 #
-##   dkh_FOUND - true if dkh and all required components found on the system
-##   dkh_VERSION - dkh version in format Major.Minor.Release
-##   dkh_INCLUDE_DIRS - Directories where dkh header is located.
-##   dkh_INCLUDE_DIR - same as DIRS
-##   dkh_DEFINITIONS: Definitions necessary to use dkh, namely USING_dkh.
-##   dkh_LIBRARIES - dkh library to link against.
-##   dkh_LIBRARY - same as LIBRARIES
+#   dkh_FOUND - true if dkh and all required components found on the system
+#   dkh_VERSION - dkh version in format Major.Minor.Release
+#   dkh_INCLUDE_DIRS - Directories where dkh header is located.
+#   dkh_INCLUDE_DIR - same as DIRS
+#   dkh_DEFINITIONS: Definitions necessary to use dkh, namely USING_dkh.
+#   dkh_LIBRARIES - dkh library to link against.
+#   dkh_LIBRARY - same as LIBRARIES
 #
 #
 # Available components: shared static
@@ -23,23 +23,23 @@
 #   static - search for only static library
 #
 #
-## Exported targets:
-##
-## ::
-##
-## If dkh is found, this module defines the following :prop_tgt:`IMPORTED`
-## target. Note that if dkh library is static, importing project must
-## declare Fortran as a language in order to populate the link libs. ::
-##
-##   dkh::dkh - the main dkh library with header, defs, & linker lang attached.
-##
-##
-## Suggested usage:
-##
-## ::
-##
-##   find_package(dkh)
-##   find_package(dkh 1.2 EXACT CONFIG REQUIRED COMPONENTS static)
+# Exported targets:
+#
+# ::
+#
+# If dkh is found, this module defines the following :prop_tgt:`IMPORTED`
+# target. Note that if dkh library is static, importing project must
+# declare Fortran as a language in order to populate the link libs. ::
+#
+#   dkh::dkh - the main dkh library with header, defs, & linker lang attached.
+#
+#
+# Suggested usage:
+#
+# ::
+#
+#   find_package(dkh)
+#   find_package(dkh 1.2 EXACT CONFIG REQUIRED COMPONENTS static)
 #
 #
 # The following variables can be set to guide the search for this package:
@@ -115,6 +115,7 @@ else()
 endif()
 set(CMAKE_FIND_LIBRARY_SUFFIXES ${_hold_library_suffixes})
 set(${PN}_LIBRARIES ${${PN}_LIBRARY})
+set(${PN}_DEFINITIONS USING_${PN})
 
 check_required_components(${PN})
 

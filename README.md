@@ -48,7 +48,7 @@ This project installs with `dkhConfig.cmake`, `dkhConfigVersion.cmake`, and `dkh
 * `find_package(dkh)` - find any dkh libraries and headers
 * `find_package(dkh 1.2 EXACT CONFIG REQUIRED COMPONENTS static)` - find dkh exactly version 1.2 built with static libraries or die trying
 
-See [dkhConfig.cmake.in](dkhConfig.cmake.in) for details of how to detect the Config file and what CMake variables and targets are exported to your project.
+See [dkhConfig.cmake.in](cmake/dkhConfig.cmake.in) for details of how to detect the Config file and what CMake variables and targets are exported to your project.
 
 #### Using
 
