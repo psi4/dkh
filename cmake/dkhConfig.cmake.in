@@ -1,10 +1,8 @@
 # dkhConfig.cmake
-# ------------------
+# ---------------
 #
-# dkh cmake module.
-# This module sets the following variables in your project:
-#
-# ::
+# DKH cmake module.
+# This module sets the following variables in your project::
 #
 #   dkh_FOUND - true if dkh and all required components found on the system
 #   dkh_VERSION - dkh version in format Major.Minor.Release
@@ -15,17 +13,13 @@
 #   dkh_LIBRARY - same as LIBRARIES
 #
 #
-# Available components: shared static
-#
-# ::
+# Available components: shared static ::
 #
 #   shared - search for only shared library
 #   static - search for only static library
 #
 #
-# Exported targets:
-#
-# ::
+# Exported targets::
 #
 # If dkh is found, this module defines the following :prop_tgt:`IMPORTED`
 # target. Note that if dkh library is static, importing project must
@@ -34,17 +28,13 @@
 #   dkh::dkh - the main dkh library with header, defs, & linker lang attached.
 #
 #
-# Suggested usage:
-#
-# ::
+# Suggested usage::
 #
 #   find_package(dkh)
 #   find_package(dkh 1.2 EXACT CONFIG REQUIRED COMPONENTS static)
 #
 #
-# The following variables can be set to guide the search for this package:
-#
-# ::
+# The following variables can be set to guide the search for this package::
 #
 #   dkh_DIR - CMake variable, set to directory containing this Config file
 #   CMAKE_PREFIX_PATH - CMake variable, set to root directory of this package

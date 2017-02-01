@@ -1,9 +1,17 @@
+cmake_policy(SET CMP0048 NEW)  # project_VERSION* variables populated from project(... VERSION x.x.x) string
+project(dkh
+        VERSION 1.2
+        LANGUAGES Fortran C)
+set(dkh_AUTHORS      "Wolf, Reiher, and Hess")
+set(dkh_DESCRIPTION  "Douglas-Kroll-Hess relativistic correction at 2nd–4th order")
+set(dkh_URL          "http://www.reiher.ethz.ch/software/dkh-x2c.html")
+#set(dkh_LICENSE
+
 cmake_minimum_required(VERSION 3.0)
-project(dkh LANGUAGES Fortran C)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ################################### Options ####################################
-include(Psi4Macros)
+include(psi4OptionsTools)
 option_with_default(CMAKE_BUILD_TYPE "Build type" Release)
 option_with_print(BUILD_SHARED_LIBS "Build final library as shared, not static" OFF)
 option_with_default(BUILD_FPIC "Libraries will be compiled with position independent code" ON)
@@ -13,9 +21,6 @@ endif()
 option_with_print(ENABLE_GENERIC "Enable mostly static linking in shared library" OFF)
 option_with_flags(ENABLE_XHOST "Enable processor-specific optimization" ON
                     "-xHost" "-march=native")
-# CODE_COVERAGE should be tested and probably propagated to external projects
-#option_with_flags(ENABLE_CODE_COVERAGE "Enables details on code coverage" OFF
-#                    "-ftest-coverage")
 
 ######################### Process & Validate Options ###########################
 include(autocmake_safeguards)
@@ -71,8 +76,8 @@ configure_package_config_file(cmake/${PN}Config.cmake.in
                               "${CMAKE_CURRENT_BINARY_DIR}/${PN}Config.cmake"
                               INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR})
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${PN}ConfigVersion.cmake
-                                 VERSION 1.2
-                                 COMPATIBILITY SameMajorVersion)
+                                 VERSION ${${PN}_VERSION}
+                                 COMPATIBILITY AnyNewerVersion)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PN}Config.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/${PN}ConfigVersion.cmake
         DESTINATION ${CMAKECONFIG_INSTALL_DIR})
