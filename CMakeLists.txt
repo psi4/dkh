@@ -5,7 +5,7 @@ project(dkh
 set(dkh_AUTHORS      "Wolf, Reiher, and Hess")
 set(dkh_DESCRIPTION  "Douglas-Kroll-Hess relativistic correction at 2nd–4th order")
 set(dkh_URL          "http://www.reiher.ethz.ch/software/dkh-x2c.html")
-#set(dkh_LICENSE
+#set(dkh_LICENSE)
 
 cmake_minimum_required(VERSION 3.0)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -26,7 +26,7 @@ option_with_flags(ENABLE_XHOST "Enable processor-specific optimization" ON
 ######################### Process & Validate Options ###########################
 include(autocmake_safeguards)
 include(autocmake_omp)
-include(autocmake_static_library)
+include(custom_static_library)
 
 ################################# Main Project #################################
 include(GNUInstallDirs)
