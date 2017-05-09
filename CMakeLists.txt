@@ -5,7 +5,7 @@ project(dkh
 set(dkh_AUTHORS      "Wolf, Reiher, and Hess")
 set(dkh_DESCRIPTION  "Douglas-Kroll-Hess relativistic correction at 2nd–4th order")
 set(dkh_URL          "http://www.reiher.ethz.ch/software/dkh-x2c.html")
-#set(dkh_LICENSE)
+set(dkh_LICENSE      "GNU Lesser General Public License, version 3")
 
 cmake_minimum_required(VERSION 3.0)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)

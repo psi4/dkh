@@ -25,6 +25,12 @@ This repository is DKH wrapped up nicely in CMake.
 
 This code was received by email. The latest version number it mentions is 1.2.
 
+#### License
+
+By permission of Prof. Reiher, this code is licensed
+under the GNU Lesser General Public License version 3
+([LGPL-3.0](https://opensource.org/licenses/LGPL-3.0)).
+
 #### Building
 
 ```bash
