@@ -3,8 +3,8 @@ Wolf, Reiher, and Hess's Douglas-Kroll-Hess relativistic correction at 2nd–4th
 order (http://www.reiher.ethz.ch/software/dkh-x2c.html) wrapped in CMake for Psi4
 (https://github.com/psi4/psi4)
 
-* A. Wolf, M. Reiher, B. A. Hess, J. Chem. Phys. 117, 9215 (2002); http://dx.doi.org/10.1063/1.1515314
-* M. Reiher, A. Wolf, J. Chem. Phys. 121, 10945 (2004); http://dx.doi.org/10.1063/1.1818681
+* A. Wolf, M. Reiher, B. A. Hess, J. Chem. Phys. 117, 9215 (2002); https://doi.org/10.1063/1.1515314
+* M. Reiher, A. Wolf, J. Chem. Phys. 121, 10945 (2004); https://doi.org/10.1063/1.1818681
 
 ### History
 
