@@ -44,7 +44,7 @@
 
 @PACKAGE_INIT@
 
-set(PN dkh)
+set(PN dkh)  # NameSpace
 set (_valid_components
     static
     shared
@@ -106,6 +106,12 @@ endif()
 set(CMAKE_FIND_LIBRARY_SUFFIXES ${_hold_library_suffixes})
 set(${PN}_LIBRARIES ${${PN}_LIBRARY})
 set(${PN}_DEFINITIONS USING_${PN})
+
+include(CMakeFindDependencyMacro)
+if(NOT TARGET tgt::lapack)
+    find_dependency(TargetLAPACK)
+endif()
+set(PN dkh)  # NameSpace
 
 check_required_components(${PN})
 
