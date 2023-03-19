@@ -33,7 +33,6 @@ include(GNUInstallDirs)
 include(FortranCInterface)
 include(CMakePackageConfigHelpers)
 
-set(PN ${PROJECT_NAME})
 
 # <<<  Build  >>>
 
@@ -55,7 +54,12 @@ if(${BUILD_SHARED_LIBS})
     endif()
 endif()
 
+# BLAS
+find_package(TargetLAPACK REQUIRED)
+target_link_libraries (dkh PUBLIC tgt::lapack)
+
 # <<<  Install  >>>
+set(PN ${PROJECT_NAME})  # NameSpace
 
 install(FILES ${CMAKE_BINARY_DIR}/DKH_MANGLE.h
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/DKH)
