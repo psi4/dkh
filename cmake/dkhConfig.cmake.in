@@ -107,6 +107,9 @@ set(CMAKE_FIND_LIBRARY_SUFFIXES ${_hold_library_suffixes})
 set(${PN}_LIBRARIES ${${PN}_LIBRARY})
 set(${PN}_DEFINITIONS USING_${PN})
 
+# make detectable the various cmake modules exported alongside
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+
 include(CMakeFindDependencyMacro)
 if(NOT TARGET tgt::lapack)
     find_dependency(TargetLAPACK)
