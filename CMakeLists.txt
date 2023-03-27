@@ -76,6 +76,15 @@ target_compile_definitions(dkh INTERFACE USING_${PN})
 target_include_directories(dkh INTERFACE
                            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
+set(export_properties
+  "dkh_VERSION"
+  )
+  set_target_properties(dkh
+    PROPERTIES
+      dkh_VERSION ${dkh_VERSION}
+    )
+set_property(TARGET dkh APPEND PROPERTY EXPORT_PROPERTIES "${export_properties}")
+
 # <<<  Export Config  >>>
 
     # explicit "share" not "DATADIR" for CMake search path
