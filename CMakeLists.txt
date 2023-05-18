@@ -1,4 +1,8 @@
 cmake_policy(SET CMP0048 NEW)  # project_VERSION* variables populated from project(... VERSION x.x.x) string
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+    # Avoid warning about DOWNLOAD_EXTRACT_TIMESTAMP in CMake 3.24:
+    cmake_policy(SET CMP0135 NEW)
+endif()
 project(dkh
         VERSION 1.2
         LANGUAGES Fortran C)
@@ -48,7 +52,7 @@ string(REGEX REPLACE "([^;]+)" "${src_prefix}\\1" sources_list "${raw_sources_li
 
 # STATIC/SHARED on below governed by BUILD_SHARED_LIBS
 add_library(dkh ${sources_list})
-add_library(${dkh}::dkh ALIAS dkh)
+add_library(dkh::dkh ALIAS dkh)
 set_target_properties(dkh PROPERTIES POSITION_INDEPENDENT_CODE ${BUILD_FPIC})
 if(${BUILD_SHARED_LIBS})
     target_link_libraries(dkh PRIVATE ${LIBC_INTERJECT})
