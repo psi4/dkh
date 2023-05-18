@@ -6,7 +6,7 @@
 #
 #   dkh_FOUND - true if dkh and all required components found on the system
 #   dkh_VERSION - dkh version in format Major.Minor.Release. Prefer target variable.
-#   dkh_INCLUDE_DIRS - Directories where dkh header and andy dependent headers are located. Prefer targets.
+#   dkh_INCLUDE_DIRS - Directories where dkh header and any dependent headers are located. Prefer targets.
 #   dkh_INCLUDE_DIR - Directories where dkh header is located. Prefer targets.
 #   dkh_DEFINITIONS: Definitions necessary to use dkh, namely USING_dkh.
 #   dkh_LIBRARIES - dkh library to link against plus any dependent libraries. Prefer targets.

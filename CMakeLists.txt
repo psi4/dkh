@@ -38,6 +38,7 @@ include(GNUInstallDirs)
 include(FortranCInterface)
 include(CMakePackageConfigHelpers)
 
+set(dkh ${PROJECT_NAME})  # NameSpace
 
 # <<<  Build  >>>
 
@@ -52,7 +53,7 @@ string(REGEX REPLACE "([^;]+)" "${src_prefix}\\1" sources_list "${raw_sources_li
 
 # STATIC/SHARED on below governed by BUILD_SHARED_LIBS
 add_library(dkh ${sources_list})
-add_library(dkh::dkh ALIAS dkh)
+add_library(${dkh}::dkh ALIAS dkh)
 set_target_properties(dkh PROPERTIES POSITION_INDEPENDENT_CODE ${BUILD_FPIC})
 if(${BUILD_SHARED_LIBS})
     target_link_libraries(dkh PRIVATE ${LIBC_INTERJECT})
@@ -67,7 +68,6 @@ find_package(TargetLAPACK REQUIRED)
 target_link_libraries (dkh PUBLIC tgt::lapack)
 
 # <<<  Install  >>>
-set(dkh ${PROJECT_NAME})  # NameSpace
 
 install(FILES ${PROJECT_BINARY_DIR}/DKH_MANGLE.h
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/DKH)
