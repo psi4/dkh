@@ -6,6 +6,12 @@ order (http://www.reiher.ethz.ch/software/dkh-x2c.html) wrapped in CMake for Psi
 * A. Wolf, M. Reiher, B. A. Hess, J. Chem. Phys. 117, 9215 (2002); https://doi.org/10.1063/1.1515314
 * M. Reiher, A. Wolf, J. Chem. Phys. 121, 10945 (2004); https://doi.org/10.1063/1.1818681
 
+### Obtain
+
+[![Anaconda-Server Badge](https://anaconda.org/conda-forge/dkh/badges/version.svg)](https://anaconda.org/conda-forge/dkh)
+[![Anaconda-Server Badge](https://anaconda.org/conda-forge/dkh/badges/platforms.svg)](https://anaconda.org/conda-forge/dkh)
+[![Anaconda-Server Badge](https://anaconda.org/conda-forge/dkh/badges/downloads.svg)](https://anaconda.org/conda-forge/dkh) + [![Anaconda-Server Badge](https://anaconda.org/psi4/dkh/badges/downloads.svg)](https://anaconda.org/psi4/dkh)
+
 ### History
 
 This is the DKH project (http://www.reiher.ethz.ch/software/dkh-x2c.html) by
@@ -34,7 +40,7 @@ under the GNU Lesser General Public License version 3
 #### Building
 
 ```bash
-cmake -H. -Bobjdir
+cmake -S. -Bobjdir
 cd objdir && make
 make install
 ```

@@ -17,7 +17,7 @@
 # In order of decreasing precedence, this module returns in a target ``tgt::lapack``
 #  (1) the libraries passed through CMake variable LAPACK_LIBRARIES,
 #  (2) the libraries defined in a detectable TargetLAPACKConfig.cmake file
-#      (skip via DISABLE_FIND_PACKAGE_TargetLAPACK), or
+#      (skip via CMAKE_DISABLE_FIND_PACKAGE_TargetLAPACK), or
 #  (3) the libraries detected by the usual FindLAPACK.cmake module.
 #
 # DKH specialization
@@ -35,7 +35,7 @@ if (LAPACK_LIBRARIES)
     set_property (TARGET tgt::lapack PROPERTY INTERFACE_LINK_LIBRARIES ${LAPACK_LIBRARIES})
 else()
     # 2nd precedence - target already prepared and findable in TargetLAPACKConfig.cmake
-    if (NOT "${DISABLE_FIND_PACKAGE_${PN}}")
+    if (NOT "${CMAKE_DISABLE_FIND_PACKAGE_${PN}}")
         find_package (TargetLAPACK QUIET CONFIG)
     endif()
     if (TARGET tgt::lapack)
@@ -46,9 +46,9 @@ else()
         # 3rd precedence - usual variables from FindLAPACK.cmake
         find_package (BLAS QUIET MODULE)
         if (NOT ${PN}_FIND_QUIETLY)
-
+            message (STATUS "LAPACK detected.")
         endif()
-    
+
         add_library (tgt::lapack INTERFACE IMPORTED)
         set_property (TARGET tgt::lapack PROPERTY INTERFACE_LINK_LIBRARIES ${BLAS_LIBRARIES})
 
@@ -57,7 +57,7 @@ else()
         unset (LAPACK_FOUND)
         unset (LAPACK_LIBRARIES)
     endif()
-endif()    
+endif()
 
 get_property (_ill TARGET tgt::lapack PROPERTY INTERFACE_LINK_LIBRARIES)
 set (${PN}_MESSAGE "Found LAPACK: ${_ill}")

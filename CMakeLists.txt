@@ -22,6 +22,7 @@ option_with_print(ENABLE_OPENMP "Enable threadsafe linking to OpenMP parallelize
 option_with_print(ENABLE_GENERIC "Enable mostly static linking in shared library" OFF)
 option_with_flags(ENABLE_XHOST "Enable processor-specific optimization" ON
                     "-xHost" "-march=native")
+option_with_default(dkh_INSTALL_CMAKEDIR "Directory to which dkh CMake config files installed." share/cmake/dkh)
 
 ######################### Process & Validate Options ###########################
 include(autocmake_safeguards)
@@ -36,6 +37,8 @@ include(CMakePackageConfigHelpers)
 
 # <<<  Build  >>>
 
+set(CMAKECONFIG_INSTALL_DIR "${dkh_INSTALL_CMAKEDIR}")
+
 FortranCInterface_HEADER(DKH_MANGLE.h
                          MACRO_NAMESPACE "DKH_MANGLE_"
                          SYMBOL_NAMESPACE "DKH_MANGLE_")
@@ -45,6 +48,7 @@ string(REGEX REPLACE "([^;]+)" "${src_prefix}\\1" sources_list "${raw_sources_li
 
 # STATIC/SHARED on below governed by BUILD_SHARED_LIBS
 add_library(dkh ${sources_list})
+add_library(${dkh}::dkh ALIAS dkh)
 set_target_properties(dkh PROPERTIES POSITION_INDEPENDENT_CODE ${BUILD_FPIC})
 if(${BUILD_SHARED_LIBS})
     target_link_libraries(dkh PRIVATE ${LIBC_INTERJECT})
@@ -59,12 +63,12 @@ find_package(TargetLAPACK REQUIRED)
 target_link_libraries (dkh PUBLIC tgt::lapack)
 
 # <<<  Install  >>>
-set(PN ${PROJECT_NAME})  # NameSpace
+set(dkh ${PROJECT_NAME})  # NameSpace
 
-install(FILES ${CMAKE_BINARY_DIR}/DKH_MANGLE.h
+install(FILES ${PROJECT_BINARY_DIR}/DKH_MANGLE.h
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/DKH)
 install(TARGETS dkh
-        EXPORT "${PN}Targets"
+        EXPORT "${dkh}Targets"
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -72,7 +76,7 @@ install(TARGETS dkh
 
 # <<<  Export Interface  >>>
 
-target_compile_definitions(dkh INTERFACE USING_${PN})
+target_compile_definitions(dkh INTERFACE USING_${dkh})
 target_include_directories(dkh INTERFACE
                            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
@@ -87,19 +91,17 @@ set_property(TARGET dkh APPEND PROPERTY EXPORT_PROPERTIES "${export_properties}"
 
 # <<<  Export Config  >>>
 
-    # explicit "share" not "DATADIR" for CMake search path
-set(CMAKECONFIG_INSTALL_DIR "share/cmake/${PN}")
-configure_package_config_file(cmake/${PN}Config.cmake.in
-                              "${CMAKE_CURRENT_BINARY_DIR}/${PN}Config.cmake"
+configure_package_config_file(cmake/${dkh}Config.cmake.in
+                              "${CMAKE_CURRENT_BINARY_DIR}/${dkh}Config.cmake"
                               INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR})
-write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${PN}ConfigVersion.cmake
-                                 VERSION ${${PN}_VERSION}
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${dkh}ConfigVersion.cmake
+                                 VERSION ${${dkh}_VERSION}
                                  COMPATIBILITY AnyNewerVersion)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PN}Config.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/${PN}ConfigVersion.cmake
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${dkh}Config.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/${dkh}ConfigVersion.cmake
               cmake/FindTargetLAPACK.cmake
         DESTINATION ${CMAKECONFIG_INSTALL_DIR})
-install(EXPORT "${PN}Targets"
-        NAMESPACE "${PN}::"
+install(EXPORT "${dkh}Targets"
+        NAMESPACE "${dkh}::"
         DESTINATION ${CMAKECONFIG_INSTALL_DIR})
 
